@@ -66,11 +66,11 @@ modules:
 install:
 	mkdir -p $(MODDESTDIR)
 	install -p -m 644 aic_load_fw/aic_load_fw.ko  $(MODDESTDIR)/
-	install -p -m 644 aic8800_fdrv/aic8800_fdrv.ko  $(MODDESTDIR)/
+	install -p -m 644 aic8800_fdrv/aic8800.ko  $(MODDESTDIR)/
 
 uninstall:
 	rm -rfv $(MODDESTDIR)/aic_load_fw.ko
-	rm -rfv $(MODDESTDIR)/aic8800_fdrv.ko
+	rm -rfv $(MODDESTDIR)/aic8800.ko
 
 clean:
 	cd aic_load_fw/;make clean;cd ..
