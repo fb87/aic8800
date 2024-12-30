@@ -49,7 +49,7 @@ ifeq ($(CONFIG_PLATFORM_UBUNTU), y)
 KDIR  = /lib/modules/$(shell uname -r)/build
 PWD   = $(shell pwd)
 KVER = $(shell uname -r)
-MODDESTDIR = /lib/modules/$(KVER)/kernel/drivers/net/wireless/aic8800
+MODDESTDIR = $(INSTALL_MOD_PATH)/lib/modules/$(KVER)/kernel/drivers/net/wireless/aic8800
 SUBARCH = $(shell uname -m | sed -e s/i.86/i386/ -e s/armv.l/arm/ -e s/aarch64/arm64/)
 ARCH ?= $(SUBARCH)
 CROSS_COMPILE ?=
@@ -67,12 +67,10 @@ install:
 	mkdir -p $(MODDESTDIR)
 	install -p -m 644 aic_load_fw/aic_load_fw.ko  $(MODDESTDIR)/
 	install -p -m 644 aic8800_fdrv/aic8800_fdrv.ko  $(MODDESTDIR)/
-	/sbin/depmod -a ${KVER}
 
 uninstall:
 	rm -rfv $(MODDESTDIR)/aic_load_fw.ko
 	rm -rfv $(MODDESTDIR)/aic8800_fdrv.ko
-	/sbin/depmod -a ${KVER}
 
 clean:
 	cd aic_load_fw/;make clean;cd ..
